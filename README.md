@@ -5,7 +5,7 @@ Aplicación web desarrollada con Django, en la cualpodrás administrar tu rendi
 ## 🔨 Project setup
 
 Primero debemos configurar el entorno virtual:
-```powershell
+```bash
 # Creamos el entorno virtual
 python -m virtualenv venv
 # Activamos el entorno
@@ -26,8 +26,8 @@ python manage.py runserver
 ```
 
 Por defecto, se encuentra el siguiente usuario:
-```json
-{
+```javascript
+const user = {
     username: "testuser",
     password: "prueba123"
 }
