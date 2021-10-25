@@ -1,0 +1,45 @@
+{% extends "ecourses/layout.html" %} {% block content %} {% load static %}
+
+<!-- Jumbotron -->
+<div class="jumbotron" style="background-color: rgba(255, 255, 255, 0.9);">
+  <h1 class="display-4">
+    Bienvenid@ {{ user.first_name }} 🚀
+  </h1>
+  <p class="lead">
+    Aquí podrás añadir todos tus cursos y ver los promedios correspondientes.
+  </p>
+  <hr class="my-3" />
+  <!-- <a href="{% url 'createuser' %}" class="btn btn-primary ">Añadir Ramo</a> -->
+
+  <form class="form-inline mb-1" method="POST" action="{% url 'addcourse' %}">
+    {% csrf_token %}
+    <div class="form-group  col-sm-6">
+      <input type="text" class="form-control  col-sm-12" id="inputPassword2" placeholder="Nombre del Curso" name="name">
+    </div>
+    <button type="submit" class="btn btn-primary ">Crear curso</button>
+  </form>
+</div>
+
+{% for curso in cursos %}
+{% if forloop.counter0|divisibleby:3 %}
+<div class="row mt-3">
+{% endif %}
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ curso }}</h5>
+        <hr>
+        <p class="card-text">Promedio: {{curso.promedio}}</p>
+        <a href="{% url 'showcourse' curso.name %}" class="btn btn-primary">Ver</a>
+      </div>
+    </div>
+  </div>
+{% if forloop.counter0|add:1|divisibleby:3 %}
+</div>
+{% endif %}
+{% endfor %}
+
+</div>
+
+
+{% endblock %}

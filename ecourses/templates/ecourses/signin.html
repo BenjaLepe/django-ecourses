@@ -1,0 +1,205 @@
+{% extends "ecourses/layout.html" %} {% block content %} {% load static %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecourses/styles/login/main.css' %}"
+/>
+
+<div class="row py-5 mt-4 align-items-center form-background">
+  <!-- For Demo Purpose -->
+  <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+    <img
+      src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
+      alt=""
+      class="img-fluid mb-3 d-none d-md-block"
+    />
+  </div>
+
+  <!-- Registeration Form -->
+  <div class="col-md-7 col-lg-6 ml-auto">
+    <form action="{% url 'createuser' %}" method="POST" id="my_form" oninput='passwordConfirmation.setCustomValidity(passwordConfirmation.value != password.value ? "Las contraseñas no coinciden" : "")'>
+      {% csrf_token %}
+      <div class="row">
+        {% if error %}
+        <div class="input-group col-lg-12 mb-4">
+          <div class="alert alert-danger" role="alert">
+            {{ error}}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- First Name -->
+        <div class="input-group col-lg-6 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+          <input
+            id="firstName"
+            type="text"
+            name="firstname"
+            placeholder="First Name"
+            required
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Last Name -->
+        <div class="input-group col-lg-6 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+          <input
+            id="lastName"
+            type="text"
+            name="lastname"
+            
+            placeholder="Last Name"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Username -->
+        <div class="input-group col-lg-12 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            required
+            placeholder="Username"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Email Address -->
+        <div class="input-group col-lg-12 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
+          <input
+            id="email"
+            type="email"
+            required
+            name="email"
+            placeholder="Email Address"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Universidad -->
+        <div class="input-group col-lg-12 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-graduation-cap"></i>
+            </span>
+          </div>
+          <select
+            id="job"
+            name="universidad"
+            class="form-control custom-select bg-white border-left-0 border-md"
+          >
+            <option selected>Selecciona tu universidad</option>
+            {% for universidad in universidades %}
+            <option value="">{{universidad}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group col-lg-6 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <input
+            id="password"
+            type="password"
+            
+            name="password"
+            placeholder="Password"
+            class="form-control bg-white border-left-0 border-md"
+            required
+          >
+        </div>
+
+        <!-- Password Confirmation -->
+        <div class="input-group col-lg-6 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <input
+            id="passwordConfirmation"
+            type="password"
+            required
+            name="passwordConfirmation"
+            placeholder="Confirm Password"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group col-lg-12">
+          <button type="submit" class="btn btn-primary col-lg-12">Create your account</button>
+        </div>
+      </form>
+
+
+        <!-- Divider Text -->
+        <div
+          class="form-group col-lg-12 mx-auto d-flex align-items-center my-4"
+        >
+          <div class="border-bottom w-100 ml-5"></div>
+          <span class="px-2 small font-weight">OR</span>
+          <div class="border-bottom w-100 mr-5"></div>
+        </div>
+
+        <!-- Social Login -->
+        <div class="form-group col-lg-12 mx-auto">
+          <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
+            <i class="fab fa-facebook-square"></i>
+            <span class="font-weight-bold">Continue with Facebook</span>
+          </a>
+          <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+            <i class="fab fa-twitter-square"></i>
+            <span class="font-weight-bold">Continue with Twitter</span>
+          </a>
+        </div>
+
+        <!-- Already Registered -->
+        <div class="text-center w-100">
+          <p class="font-weight">
+            Already Registered?
+            <a href="#" class="btn btn-primary">Login</a>
+          </p>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

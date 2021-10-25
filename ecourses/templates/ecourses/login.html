@@ -1,0 +1,112 @@
+{% extends "ecourses/layout.html" %} {% block content %} {% load static %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecourses/styles/login/main.css' %}"
+/>
+
+<div class="row py-5 mt-4 align-items-center form-background">
+  <!-- For Demo Purpose -->
+  <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+    <img
+      src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
+      alt=""
+      class="img-fluid mb-3 d-none d-md-block"
+    />
+  </div>
+
+  <!-- Registeration Form -->
+  <div class="col-md-7 col-lg-6 ml-auto">
+    <form action="{% url 'login' %}" method="POST" id="my_form">
+      {% csrf_token %}
+
+      <div class="row">
+        {% if error %}
+        <div class="input-group col-lg-12 mb-4">
+          <div class="alert alert-danger" role="alert">
+            {{ error}}
+          </div>
+        </div>
+        {% endif %}
+        <!-- Username -->
+        <div class="input-group col-lg-12 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="Username"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="input-group col-lg-12 mb-4">
+          <div class="input-group-prepend">
+            <span
+              class="input-group-text bg-white px-4 border-md border-right-0"
+            >
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="form-control bg-white border-left-0 border-md"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group col-lg-12 mx-auto mb-0">
+          <a
+            href="javascript:{}"
+            onclick="document.getElementById('my_form').submit();"
+            class="btn btn-primary btn-block py-2"
+          >
+            <span class="font-weight-bold">Log in</span>
+          </a>
+        </div>
+
+        <!-- Divider Text -->
+        <div
+          class="form-group col-lg-12 mx-auto d-flex align-items-center my-4"
+        >
+          <div class="border-bottom w-100 ml-5"></div>
+          <span class="px-2 small font-weight">OR</span>
+          <div class="border-bottom w-100 mr-5"></div>
+        </div>
+
+        <!-- Social Login -->
+        <div class="form-group col-lg-12 mx-auto">
+          <a href="" class="btn btn-primary btn-block py-2 btn-facebook">
+            <i class="fab fa-facebook-square"></i>
+            <span class="font-weight-bold">Continue with Facebook</span>
+          </a>
+          <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+            <i class="fab fa-twitter-square"></i>
+            <span class="font-weight-bold">Continue with Twitter</span>
+          </a>
+        </div>
+
+        <!-- Already Registered -->
+        <div class="text-center w-100">
+          <p class="font-weight">
+            Aun no te registras?
+            <a href="{% url 'createuser' %}" class="btn btn-primary ml-2"
+              >Registrate</a
+            >
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
